@@ -28,36 +28,26 @@ Check [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## API Reference
 This is a list of all the methods, what they do, their arguments, and how they use them.
-NOTE: anything in curly brackets "{" "}" is a variable.
 
+#### `CONFIG`
+`CONFIG` is a dictionary that contains the default configurations, to change it, all you need to do is to set the pick the value you want to change, and only change that value. **Never Ever** try this:
 
-#### `configure(configuration) -> None`
-Configure takes in a dictionary called `confguration`
-
-Below is a list of values that configure takes:
-
-`has_short_flags: bool` -- Default: `False` This controls if klarg automatically generates one letter flags when necessary.
-
-`long_prefix: str` -- Default: `"--"` This sets what klarg searches for to find a flag.
-
-`short_prefix: str` -- Default: `"-"` This sets what klarg searches for in shortened versions of a flag
-
-`help_flag: tuple` -- Default: `("--help", "-h")` This sets what klarg looks for to display the help message.
-
-`version_flag: tuple` -- Default: `("--version", "-v")`
-
-Example:
 ```py
-# docs_example.py
 import klarg
-settings = {
-    "has_short_flags": True,
-    "long_prefix": "/",
-    "short_prefix": "-"
+klarg.CONFIG = {
+    "some_setting": "some_value"
 }
-
-klarg.configure(settings)
 ```
+
+Doing this will erase all other settings except `"some_setting"`. Instead, do this
+
+```py
+import klarg
+klarg.config["some_setting"] = "some_value"
+```
+
+This makes sure not to change the code and instead changes a particular value.
+
 
 #### `get_all() -> tuple`
 Collects all the arguments passed and returns them all as a tuple full of strings. This is useful when a program needs to collect a list of all the arguments passed on to operate on, it passes everything single option passed to the file.
@@ -70,6 +60,8 @@ import klarg
 all_args = klarg.get_all()
 print(f"All args {all_args}")
 
+# python docs_example.py -a -b "c" -d --efgh --ijklmn 0
+# All args ("-a", "-b", "c", "-d", "--efgh", "--ijklmn", "0")
 ```
 
 #### `get_bool(name, short) -> bool`
