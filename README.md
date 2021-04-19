@@ -22,4 +22,4 @@ if (klarg_is_coool):
 # Oh, my, klarg is cool.
 ```
 
-Check out the [docs](DOCS.md) (in development) 
+Check out the [Documentation](DOCS.md)
