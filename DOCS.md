@@ -3,13 +3,13 @@
 This is where the documentation and references are.
 
 ## Overview
-[Introduction](##Introduction)
+[Introduction](#Introduction)
 
-[Terminology](##Terminology)
+[Terminology](#Terminology)
 
-[Contributing](##Contributing)
+[Contributing](#Contributing)
 
-[API Reference](##APIReference)
+[API Reference](#APIReference)
 
 
 ## Introduction
