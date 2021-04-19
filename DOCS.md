@@ -1,10 +1,14 @@
 # Klarg docs
 
 This is where the documentation and references are.
+
 ## Overview
 [Introduction](##Introduction)
+
 [Terminology](##Terminology)
+
 [Contributing](##Contributing)
+
 [API Reference](##APIReference)
 
 
@@ -29,11 +33,17 @@ NOTE: anything in curly brackets "{" "}" is a variable.
 
 #### `configure(configuration) -> None`
 Configure takes in a dictionary called `confguration`
+
 Below is a list of values that configure takes:
+
 `has_short_flags: bool` -- Default: `False` This controls if klarg automatically generates one letter flags when necessary.
+
 `long_prefix: str` -- Default: `"--"` This sets what klarg searches for to find a flag.
+
 `short_prefix: str` -- Default: `"-"` This sets what klarg searches for in shortened versions of a flag
+
 `help_flag: tuple` -- Default: `("--help", "-h")` This sets what klarg looks for to display the help message.
+
 `version_flag: tuple` -- Default: `("--version", "-v")`
 
 Example:
@@ -64,6 +74,7 @@ print(f"All args {all_args}")
 
 #### `get_bool(name, short) -> bool`
 `name: str: NEEDED`
+
 `short: str: optional`
 
 `get_bool` is a function that collects `name`, a string, and `short`, also a string. `name` is the long name for the command line argument, i.e. (`--long-name`). `short` is the shorter name for the command line argument (`-s`). Normally, if `short` is not given, then it does not make one up, unless configured with `configure()`.
@@ -89,7 +100,9 @@ else:
 
 #### `get_str(name, short, on_error) -> str`
 `name: str: NEEDED`
+
 `short: str: optional`
+
 `on_error: function: optional`
 
 `get_str` is a function that collects a `name`, which is the multi letter flag, a `short`, which is the shortened version of the flag. There is only one type of errors it can encounter, which is when no value is provided. Because of this, `on_error` is not a dictionary, but a special function that handles when no value is provided.
@@ -114,7 +127,9 @@ print(f"{some_str} is cool")
 
 #### `get_num(name, short, on_error) -> num*`
 `name: str: NEEDED`
+
 `short: str: optional`
+
 `on_error: dict: optional`
 
 `get_num` is a function that collects a `name`, which is the multi letter flag, a `short`, which is the shortened version of the flag. There are two possible types of errors it can encounter, one being that the value it got was not a number, or that it did not get a value at all, the error names are `ERR_NUM` and `ERR_NONE` respectively. `on_error` is a dictionary, both keys, `ERR_NUM` and `ERR_NONE` are not needed. 
