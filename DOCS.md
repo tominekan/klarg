@@ -196,3 +196,9 @@ klarg.project_version("This project version is 1.2.3")
 # python docs_example.py --version
 # This project version is 1.2.3
 ```
+
+
+#### `command(command_name)`
+`name: str: NEEDED`
+
+This creates a class with the CLI that has the functions `project_version()`, `on_help()`, `get_num()`, `get_str()`, `get_bool()`, and `get_all()`. The only difference is that the arguments are parsed after the declaration of the command. This means that if you have a list of command line arguments `["-f", "reply", "-n", "12", "example.txt"]`, and the command name is `reply`. The available CLI arguments are `["-n", "12", "example.txt"]`
