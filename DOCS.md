@@ -9,7 +9,7 @@ This is where the documentation and references are.
 
 [Contributing](#Contributing)
 
-[API Reference](#API Reference)
+[API Reference](#API)
 
 
 ## Introduction
