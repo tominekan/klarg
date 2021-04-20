@@ -5,7 +5,7 @@ ALL_ARGS = sys.argv[1: len(sys.argv)]
 
 # The configuration settings, this can be changed with the config function
 CONFIG = {
-    "has_short_flags": False,
+    "needs_short_flags": False,
     "long_prefix": "--",
     "short_prefix": "-",
     "help_flag": ("--help", "-h"),
@@ -35,3 +35,49 @@ def get_all() -> list:
     """
 
     return ALL_ARGS
+
+
+def get_bool(name: str, short: str = "default") -> bool:
+    """
+    `name: str: NEEDED`
+
+    `short: str: optional`
+
+    `get_bool` is a function that collects `name`, a string, and `short`,
+    also a string. `name` is the long name for the command line argument,
+    i.e. (`--long-name`). `short` is the shorter name for the command
+    line argument (`-s`). Normally, if `short` is not given,
+    then it will not raise an error, unless `"needs_short_flags"`
+    is set to `True` in `CONFIG`.
+
+    Example:
+    ```py
+    # docs_example.py
+    import klarg
+
+    is_there = klarg.bool("--is-there", "-i")
+
+    if (is_there):
+        print("Is there")
+    else:
+        print("Is not there")
+
+    # python docs_example.py
+    # Is not there
+
+    # python docs_example.py --is-there
+    # is there
+    ```
+
+    """
+
+    if short == "default":
+        if (CONFIG["needs_short_flags"]):
+            raise Exception(
+                "No short flag for get_bool()"
+            )
+
+    if (name in ALL_ARGS) or (short in ALL_ARGS):
+        return True
+    else:
+        return False

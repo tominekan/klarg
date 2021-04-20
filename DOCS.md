@@ -30,7 +30,7 @@ Check [CONTRIBUTING.md](CONTRIBUTING.md)
 This is a list of all the methods, what they do, their arguments, and how they use them.
 
 #### `CONFIG`
-`CONFIG` is a dictionary that contains the default configurations, to change it, all you need to do is to set the pick the value you want to change, and only change that value. **Never Ever** try this:
+`CONFIG` is a dictionary that contains the default configurations, to change it, all you need to do is to set the pick the value you want to change, and only change that value. **Never** try this:
 
 ```py
 import klarg
@@ -46,7 +46,11 @@ import klarg
 klarg.config["some_setting"] = "some_value"
 ```
 
-This makes sure not to change the code and instead changes a particular value.
+This makes sure not to change the code and instead changes a particular value. Available settings are
+
+Name | Type | Default Value | Explanation
+-----|------|---------------|-------------
+`"needs_short_flags"`| `bool` | `False` | 
 
 
 #### `get_all() -> list`
@@ -69,7 +73,7 @@ print(f"All args {all_args}")
 
 `short: str: optional`
 
-`get_bool` is a function that collects `name`, a string, and `short`, also a string. `name` is the long name for the command line argument, i.e. (`--long-name`). `short` is the shorter name for the command line argument (`-s`). Normally, if `short` is not given, then it does not make one up, unless configured with `configure()`.
+`get_bool` is a function that collects `name`, a string, and `short`, also a string. `name` is the long name for the command line argument, i.e. (`--long-name`). `short` is the shorter name for the command line argument (`-s`). Normally, if `short` is not given, then it will not raise an error, unless `"needs_short_flags"` is set to `True` in `CONFIG`.
 
 Example:
 ```py
@@ -126,7 +130,7 @@ print(f"{some_str} is cool")
 
 `get_num` is a function that collects a `name`, which is the multi letter flag, a `short`, which is the shortened version of the flag. There are two possible types of errors it can encounter, one being that the value it got was not a number, or that it did not get a value at all, the error names are `ERR_NUM` and `ERR_NONE` respectively. `on_error` is a dictionary, both keys, `ERR_NUM` and `ERR_NONE` are not needed. 
 
-* num can be either an integer or a floating point
+\* num can be either an integer or a floating point
 
 Example:
 ```py
@@ -159,7 +163,7 @@ print(f"The suprise number is {number_something}")
 #### `on_help(action) -> None`
 `action: function: NEEDED`
 
-The `action` is run when klarg detects the help flag. What klarg looks for can be configured in the `configure()` option.
+The `action` is run when klarg detects the help flag. What klarg looks for can be configured in `CONFIG` with the option `"help_flag"`.
 
 Example:
 ```py
@@ -177,7 +181,7 @@ klarg.on_help(display_help_message)
 #### `project_version(message) -> None`
 `message: str: NEEDED`
 
-Klarg displays the `message` when the version flag is detected. What klarg looks for can be configured in the `configure()` option.
+Klarg displays the `message` when the version flag is detected. What klarg looks for can be configured in `CONFIG` with the option `"version_flag"`.
 
 Example:
 ```py
