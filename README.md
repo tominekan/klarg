@@ -77,4 +77,4 @@ if (klarg_is_cool):
 # python example.py -k
 # Oh, my, klarg is cool.
 ```
-Check out the [https://github.com/tominekan/klarg/blob/main/DOCS.md](DOCS.md) for more. 
+Check out the [Documentation](https://github.com/tominekan/klarg/blob/main/DOCS.md) for more. 
