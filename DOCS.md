@@ -13,7 +13,7 @@ This is where the documentation and references are.
 
 
 ## Introduction
-Klarg is a small, fast (as python goes 😃) and simple command line argument parsing library built with no 3rd party dependencies.
+Klarg is a small and simple command line argument parsing library built with no 3rd party dependencies.
 
 
 ## Terminology
@@ -48,9 +48,37 @@ klarg.config["some_setting"] = "some_value"
 
 This makes sure not to change the code and instead changes a particular value. Available settings are
 
-Name | Type | Default Value | Explanation
------|------|---------------|-------------
-`"needs_short_flags"`| `bool` | `False` | 
+Name                 | Type    | Default Value         | Explanation                                                        |
+---------------------|---------|-----------------------|--------------------------------------------------------------------|
+`"needs_short_flags"`| `bool`  | `False`               | Controls whether klarg raises an error if a short flag is missing. |
+`"long_prefix"`      | `str`   | `"--"`                | Sets what klarg looks for in a multi letter switch.                |
+`"short_prefix"`     | `str`   | `"-"`                 | Sets what klarg looks for in a shortened switch                    |
+`"help_flag"`        | `tuple` | `("--help", "-h")`    | Sets what klarg looks for to trigger the `on_help` function        |
+`"version_flag"`     | `tuple` | `("--version", "-v")` | Sets what klarg looks for to print the `project_version` message   |
+
+
+### `exists(name) -> bool`
+`name: str: NEEDED`
+
+Checks if the `name` exists in the list of command line arguments given, this was designed to be an internal function for making things more readable, but then I realized that it could potentially be helpful.
+
+Example:
+```py
+# docs_example.py
+import klarg
+
+something_exists = klarg.exists("something")
+if something_exists:
+    print("Something exists")
+else:
+    print("Nothing exists (that's kind of dark)")
+
+# python docs_example.py does something exist
+# Something exists
+
+# python docs_example.py does nothing exist
+# Nothing exists (that's kind of dark)
+```
 
 
 #### `get_all() -> list`
@@ -128,9 +156,9 @@ print(f"{some_str} is cool")
 
 `on_error: dict: optional`
 
-`get_num` is a function that collects a `name`, which is the multi letter flag, a `short`, which is the shortened version of the flag. There are two possible types of errors it can encounter, one being that the value it got was not a number, or that it did not get a value at all, the error names are `ERR_NUM` and `ERR_NONE` respectively. `on_error` is a dictionary, both keys, `ERR_NUM` and `ERR_NONE` are not needed. 
+`get_num` is a function that collects a `name`, which is the multi letter flag, a `short`, which is the shortened version of the flag. There are two possible types of errors it can encounter, one being that the value it got was not a number, it did not get a value at all, or that there are multiple declarations of that flag. The error names are `ERR_NUM`, `ERR_NONE` and `ERR_MUL` respectively. `on_error` is a dictionary, all three keys, `ERR_NUM`,`ERR_NONE` and `ERR_MUL` are not all needed, because there is default handling for those types of errors. The default handling for these errors return exit code 1. However, if there is no flag with the name of `name`, then `get_num` returns None.
 
-\* num can be either an integer or a floating point
+\* num can be either an integer or a floating point integer.
 
 Example:
 ```py
@@ -197,4 +225,4 @@ klarg.project_version("This project version is 1.2.3")
 #### `command(command_name)`
 `name: str: NEEDED`
 
-This creates a class with the CLI that has the functions `project_version()`, `on_help()`, `get_num()`, `get_str()`, `get_bool()`, and `get_all()`. The only difference is that the arguments are parsed after the declaration of the command. This means that if you have a list of command line arguments `["-f", "reply", "-n", "12", "example.txt"]`, and the command name is `reply`. The available CLI arguments are `["-n", "12", "example.txt"]`
+This creates a class with the command line that has the functions `project_version()`, `on_help()`, `get_num()`, `get_str()`, `get_bool()`, and `get_all()`. The only difference is that the arguments are parsed after the declaration of the command. This means that if you have a list of command line arguments `["-f", "reply", "-n", "12", "example.txt"]`, and the command name is `reply`. The available Command arguments are `["-n", "12", "example.txt"]`
