@@ -52,8 +52,8 @@ else:
 # I am here
 ```
 
-## Encourages good practices
-Klarg comes default with `on_help` and `project_version` functions. By making it easy to integrate help and versioning into the project, klarg encourages it use, supporting better practices.
+## No 3rd party dependencies
+Klarg was specifically designed not to include any external dependencies, helping to keep the size small. 
 
 # Installation
 Installing klarg is incredibly simple, just type in
