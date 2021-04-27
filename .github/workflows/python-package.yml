@@ -35,4 +35,4 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --ignore=E402
     - name: Test with run_test.sh
       run: |
-        bash src/test/run_tests.sh
+        bash test/run_tests.sh

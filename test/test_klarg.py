@@ -1,7 +1,7 @@
 import sys
 import os
 sys.path.append(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..src/")))
 
 import klarg
 
@@ -18,7 +18,6 @@ ALL_ARGS = [
 class TestKlarg():
 
     def __init__(self):
-        self.test_command = klarg.command("test")
         self.test_get_all()
         self.test_get_bool()
         self.test_exists()
@@ -31,7 +30,7 @@ class TestKlarg():
 
         """
 
-        assert self.test_command.get_all() == ALL_ARGS
+        assert klarg.get_all() == ALL_ARGS
 
     def test_get_bool(self):
         """
@@ -41,19 +40,19 @@ class TestKlarg():
 
         # Tests that whena multi-letter flag is there,
         # but a single letter flag is not, klar.get_bool() returns True.
-        assert self.test_command.get_bool("some-number", "s") is True
+        assert klarg.get_bool("some-number", "s") is True
 
         # Tests that when both the shortened and non-shortened flags are
         # present, klarg.get_bool() returns True.
-        assert self.test_command.get_bool("not-number", "n") is True
+        assert klarg.get_bool("not-number", "n") is True
 
         # Tests that when a multi letter flag is not there but a shortened
         # flag is present, klarg.get_bool() returns True.
-        assert self.test_command.get_bool("non-existent-args", "n") is True
+        assert klarg.get_bool("non-existent-args", "n") is True
 
         # Tests that when neither the single nor the multi letter flag is
         # present, the klarg.get_bool() returns False.
-        assert self.test_command.get_bool("non-existent-args", "s") is False
+        assert klarg.get_bool("non-existent-args", "s") is False
 
     def test_exists(self):
         """
@@ -63,11 +62,11 @@ class TestKlarg():
 
         # Tests that klarg.exists() returns True for existing command line
         # arguments
-        assert self.test_command.exists("10") is True
+        assert klarg.exists("10") is True
 
         # Tests that klarg.exists() returns False for non existing
         # command line arguments
-        assert self.test_command.exists("--non-existent-args") is False
+        assert klarg.exists("--non-existent-args") is False
 
     def test_get_str(self):
         """
@@ -88,22 +87,18 @@ class TestKlarg():
         }
 
         # Tests klarg.get_str() returns the correct string
-        assert self.test_command.get_str("some-number") == "10"
+        assert klarg.get_str("some-number") == "10"
 
         # Tests klarg.get_str() returns the correct string
-        assert self.test_command.get_str("not-number") == "1a"
+        assert klarg.get_str("not-number") == "1a"
 
         # Tests that klarg.get_str() raises the right errors
         # This should raise ERR_NONE
-        should_raise_none = self.test_command.get_str(
-            "number-no-args",
-            on_error=handle_errors
-        )
-        assert should_raise_none is None
+        assert klarg.get_str("number-no-args", on_error=handle_errors) is None
 
         # Tests that klarg.get_str() raises the right errors
         # This should raise ERR_MUL
-        should_raise_none = self.test_command.get_str(
+        should_raise_none = klarg.get_str(
             "number-no-args",
             "s",
             on_error=handle_errors
@@ -125,9 +120,9 @@ class TestKlarg():
             "ERR_NUM": handle_err_num
         }
 
-        assert self.test_command.get_num("some-number") == 10
+        assert klarg.get_num("some-number") == 10
 
-        should_raise_errors = self.test_command.get_num(
+        should_raise_errors = klarg.get_num(
             "not-number",
             on_error=handle_errors
         )
