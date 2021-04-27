@@ -2,7 +2,7 @@
 echo "--------------- Testing Normal Klarg Functions ---------------"
 echo ""
 echo ""
-python3.8 test_klarg.py --some-number 10 --not-number 1a --number-no-args  -n
+python3.8 src/test/test_klarg.py --some-number 10 --not-number 1a --number-no-args  -n
 echo ""
 echo ""
 
@@ -10,7 +10,7 @@ echo ""
 echo "--------------- Testing klarg.command functions ---------------"
 echo ""
 echo ""
-python3.8 test_klarg_command.py --this-should-not-work test --some-number 10 --not-number 1a --number-no-args  -n
+python3.8 src/test/test_klarg_command.py --this-should-not-work test --some-number 10 --not-number 1a --number-no-args  -n
 echo ""
 echo ""
 
