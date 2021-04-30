@@ -11,7 +11,7 @@ long_description = read_file("README.md")
 
 setup(
     name="klarg",
-    version="0.0.1",
+    version="1.1.0",
     author="Tomi Adenekan",
     author_email="tominekan@outlook.com",
     description="A simple command line argument parsing library",

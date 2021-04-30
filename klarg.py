@@ -1,8 +1,8 @@
 import sys
-from typing import Callable, Union, get_args
+from typing import Callable, Union
 
 # Some information about this package
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 # All the command line arguments
 ALL_ARGS = sys.argv[1: len(sys.argv)]
