@@ -1,9 +1,12 @@
 # Klarg
 
+<p align="center">
+<img src="website/assets/klarg_icon.png" alt="Klarg Icon"></img>
+</p>
+
 A **K**ommand **L**ine **ARG**ument parsing library.
 
 Klarg is a small and simple command line argument parsing library built with no 3rd party dependencies.
-
 
 # Why use klarg?
 ## Simple syntax
